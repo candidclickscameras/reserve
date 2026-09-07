@@ -182,9 +182,10 @@
     }
 
     .primary-btn,
-    .cancel-btn {
+    .cancel-btn,
+    .secondary-btn {
       width: 100%;
-      min-height: 50px;
+      min-height: 48px;
       border: 0;
       border-radius: 11px;
       font-family: var(--font-body) !important;
@@ -206,6 +207,12 @@
     .primary-btn:disabled {
       opacity: .6;
       cursor: not-allowed;
+    }
+
+    .secondary-btn {
+      background: var(--brand-blue-dark);
+      color: white;
+      margin-top: 10px;
     }
 
     .cancel-btn {
@@ -347,13 +354,60 @@
       font-size: 18px;
     }
 
+    .qr-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 15px 0 10px;
+    }
+
+    .qr-tab-btn {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      font-family: var(--font-body) !important;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .qr-tab-btn.active {
+      background: var(--brand-blue);
+      color: white;
+      border-color: var(--brand-blue);
+    }
+
+    .qr-container {
+      margin: 15px 0;
+    }
+
+    .qr-container p {
+      margin: 0 0 10px;
+      font-weight: 700;
+      color: var(--brand-blue-dark);
+    }
+
     .qr {
       display: block;
       width: min(220px, 70vw);
-      margin: 18px auto;
+      margin: 0 auto;
       border-radius: 10px;
-      border: 8px solid white;
-      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+      border: 1px solid var(--border);
+    }
+
+    .payment-ref-box {
+      margin-top: 18px;
+      padding: 15px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .payment-ref-box label {
+      margin-bottom: 5px;
     }
 
     .payment-safe-note {
@@ -476,6 +530,13 @@
       </div>
 
       <div class="field">
+        <label for="custContact">
+          Contact Number <span class="required">*</span>
+        </label>
+        <input type="tel" id="custContact" placeholder="e.g. 09171234567" pattern="^[0-9+\s\-]{7,15}$" required>
+      </div>
+
+      <div class="field">
         <label for="custEmail">
           Email Address <span class="required">*</span>
         </label>
@@ -487,7 +548,7 @@
         <div>
           <strong>Safe & Secure Payment Process</strong><br>
           We do <strong>not collect payment information on this website.</strong>
-          Payment is made separately through the official Candid Clicks QR code.<br><br>
+          Payment is made separately through the official Candid Clicks QR codes.<br><br>
           Never enter your card number, banking password, or OTP on this page.
         </div>
       </div>
@@ -504,7 +565,7 @@
         <div class="summary-header">
           <h3 id="summaryTitle">Reservation Submitted</h3>
           <div class="reference">
-            Reference No: <strong id="bookingReference">—</strong>
+            System Reference No: <strong id="bookingReference">—</strong>
           </div>
           <div id="statusBadge" class="status pending">
             ● Awaiting Payment Verification
@@ -520,6 +581,10 @@
             <div class="detail-row">
               <span class="detail-label">Customer</span>
               <span class="detail-value" id="summaryCustomer"></span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Contact Number</span>
+              <span class="detail-value" id="summaryContact"></span>
             </div>
             <div class="detail-row">
               <span class="detail-label">Email</span>
@@ -553,13 +618,43 @@
 
           <div id="paymentSection" class="payment-section">
             <h4>Complete Your Payment</h4>
-            <p>Scan the official Candid Clicks payment QR code.</p>
-            <p><strong>GCash / Maya / Bank</strong></p>
-            <img src="payment-qr.png" class="qr" alt="Candid Clicks Payment QR Code">
-            <p><strong>Reference No: <span id="paymentReference">—</span></strong></p>
+            <p>Scan your preferred official payment QR code below:</p>
+
+            <div class="qr-tabs">
+              <button type="button" class="qr-tab-btn active" onclick="showQR('gcash', this)">GCash</button>
+              <button type="button" class="qr-tab-btn" onclick="showQR('maribank', this)">MariBank</button>
+              <button type="button" class="qr-tab-btn" onclick="showQR('gotyme', this)">GoTyme</button>
+            </div>
+
+            <div id="qr-gcash" class="qr-container">
+              <p>GCash</p>
+              <img src="https://lh3.googleusercontent.com/d/1ZEaNC-aib9fgHS75bXIgYXYOMisi_q3c" class="qr" alt="GCash Payment QR Code">
+            </div>
+
+            <div id="qr-maribank" class="qr-container" style="display:none;">
+              <p>MariBank</p>
+              <img src="https://lh3.googleusercontent.com/d/1ogJouuBplk8Xuyq7bbKpQBWFI9M0pLqS" class="qr" alt="MariBank Payment QR Code">
+            </div>
+
+            <div id="qr-gotyme" class="qr-container" style="display:none;">
+              <p>GoTyme</p>
+              <img src="https://lh3.googleusercontent.com/d/1sN1L8Dg1mn0whCkMo2MtqfgQLUJS8JkX" class="qr" alt="GoTyme Payment QR Code">
+            </div>
+
+            <p style="margin-top: 15px; font-size: 13px;"><strong>Reservation System Ref: <span id="paymentReference">—</span></strong></p>
+
+            <div class="payment-ref-box">
+              <label for="userPaymentRef">Submit Your Payment Transaction Reference No.:</label>
+              <input type="text" id="userPaymentRef" placeholder="e.g. GCash Ref / Bank Trans # 123456789">
+              <button type="button" class="secondary-btn" id="submitPaymentRefBtn" onclick="submitPaymentReference()">Submit Payment Reference</button>
+              <div id="paymentRefSuccess" class="notice success-notice" style="display:none; margin-top:8px;">
+                ✓ Payment reference submitted successfully for admin verification.
+              </div>
+            </div>
+
             <div class="payment-safe-note">
-              🔒 <strong>No payment is processed on this website.</strong><br>
-              We only display the official payment QR code.
+              🔒 <strong>No payment is processed directly on this website.</strong><br>
+              We only display official payment QR codes for manual transfer.
             </div>
           </div>
 
@@ -631,6 +726,14 @@ function formatDuration(hours) {
   return `${Math.ceil(hours / 24)} day(s)`;
 }
 
+function showQR(provider, btnElement) {
+  document.querySelectorAll('.qr-container').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.qr-tab-btn').forEach(btn => btn.classList.remove('active'));
+  
+  document.getElementById(`qr-${provider}`).style.display = 'block';
+  btnElement.classList.add('active');
+}
+
 function loadInventory() {
   inventory = getStorageData("gear_inv", []);
   renderSelect();
@@ -685,13 +788,14 @@ function calculateRentalPrice(gear, start, end) {
   return days * getMultiDayRate(gear);
 }
 
-function getNextAvailableDate(camId, start, gear) {
+function getNextAvailableDate(camId, start, gear, excludeBookingId = null) {
   const bufferMinutes = Number(gear.buffer || 0);
   
   // Get all active overlapping or future bookings for this unit
   const activeBookings = bookings.filter(booking => {
     if (String(booking.camId) !== String(camId)) return false;
     if (booking.status === "Cancelled" || booking.status === "Canceled") return false;
+    if (excludeBookingId && String(booking.id) === String(excludeBookingId)) return false;
     return true;
   });
 
@@ -720,16 +824,16 @@ function getNextAvailableDate(camId, start, gear) {
   return latestEnd;
 }
 
-function getPricingDescription(gear, start, end) {
+function getPricingDescription(gear, start, end, bookingId = null) {
   const duration = getDuration(start, end);
   const days = Math.ceil(duration.hours / 24);
-  const nextAvailable = getNextAvailableDate(gear.id, start, gear);
+  const nextAvailable = getNextAvailableDate(gear.id, start, gear, bookingId);
 
   let availabilityNote = "";
   if (nextAvailable) {
     availabilityNote = `⚠️ Currently reserved during your chosen time. Next available starting ${formatDate(nextAvailable)}. `;
   } else {
-    availabilityNote = `✓ Available starting ${formatDate(start)}. `;
+    availabilityNote = `✓ Available for your requested rental period starting ${formatDate(start)}. `;
   }
 
   if (duration.hours < 24) {
@@ -743,11 +847,12 @@ function getPricingDescription(gear, start, end) {
   return availabilityNote + `Multi-day rate of ₱${money(getMultiDayRate(gear))}/day applied for ${days} day(s).`;
 }
 
-function bookingHasConflict(camId, start, end, gear) {
+function bookingHasConflict(camId, start, end, gear, excludeBookingId = null) {
   const bufferMinutes = Number(gear.buffer || 0);
   return bookings.some(booking => {
     if (String(booking.camId) !== String(camId)) return false;
     if (booking.status === "Cancelled" || booking.status === "Canceled") return false;
+    if (excludeBookingId && String(booking.id) === String(excludeBookingId)) return false;
 
     const bookingStart = new Date(booking.start);
     const bookingEnd = new Date(booking.end);
@@ -783,13 +888,18 @@ function submitBooking(event) {
   const startValue = document.getElementById("startTime").value;
   const endValue = document.getElementById("endTime").value;
   const name = document.getElementById("custName").value.trim();
-  const email = document.getElementById("custEmail").value.trim();
+  const contactInput = document.getElementById("custContact");
+  const contact = contactInput.value.trim();
+  const emailInput = document.getElementById("custEmail");
+  const email = emailInput.value.trim();
 
+  // Strict Validation Checks: Do not proceed if required fields are missing or invalid
   if (!camId) return showFormError("Please select a camera unit.");
   if (!startValue) return showFormError("Please select the rental start date and time.");
   if (!endValue) return showFormError("Please select the rental end date and time.");
-  if (!name || name.length < 2) return showFormError("Please enter a valid full name.");
-  if (!email || !document.getElementById("custEmail").checkValidity()) return showFormError("Please enter a valid email address.");
+  if (!name || name.length < 2) return showFormError("Please enter your full name.");
+  if (!contact || !contactInput.checkValidity()) return showFormError("Please enter a valid contact number.");
+  if (!email || !emailInput.checkValidity()) return showFormError("Please enter a valid email address.");
 
   const start = new Date(startValue);
   const end = new Date(endValue);
@@ -822,6 +932,7 @@ function submitBooking(event) {
     camId: gear.id,
     camName: gear.name,
     customer: name,
+    contact: contact,
     email: email,
     start: start.toISOString(),
     end: end.toISOString(),
@@ -832,6 +943,7 @@ function submitBooking(event) {
     paymentVerified: false,
     confirmationEmailSent: false,
     depositReturned: false,
+    paymentRefNumber: "",
     status: "Pending Payment",
     createdAt: new Date().toISOString()
   };
@@ -846,21 +958,50 @@ function submitBooking(event) {
   alert("Your reservation request has been submitted. Please complete your payment using the official QR code.");
 }
 
+function submitPaymentReference() {
+  const refInput = document.getElementById("userPaymentRef").value.trim();
+  if (!refInput) {
+    alert("Please enter a payment transaction reference number.");
+    return;
+  }
+
+  if (!currentBookingId) return;
+
+  bookings = getStorageData("gear_bookings", []);
+  const index = bookings.findIndex(item => String(item.id) === String(currentBookingId));
+
+  if (index !== -1) {
+    bookings[index].paymentRefNumber = refInput;
+    saveStorageData("gear_bookings", bookings);
+    
+    document.getElementById("paymentRefSuccess").style.display = "block";
+    setTimeout(() => {
+      document.getElementById("paymentRefSuccess").style.display = "none";
+    }, 4000);
+  }
+}
+
 function showBookingSummary(booking, gear) {
   document.getElementById("bookingSummary").style.display = "block";
   document.getElementById("bookingReference").textContent = booking.reference;
   document.getElementById("paymentReference").textContent = booking.reference;
   document.getElementById("summaryCamera").textContent = booking.camName;
   document.getElementById("summaryCustomer").textContent = booking.customer;
+  document.getElementById("summaryContact").textContent = booking.contact || "N/A";
   document.getElementById("summaryEmail").textContent = booking.email;
   document.getElementById("summaryPeriod").textContent = `${formatDate(booking.start)} → ${formatDate(booking.end)}`;
   document.getElementById("summaryDuration").textContent = formatDuration(booking.durationHours);
   document.getElementById("rentalFee").textContent = money(booking.price);
   document.getElementById("secDeposit").textContent = money(booking.deposit);
   document.getElementById("totalDue").textContent = money(Number(booking.price) + Number(booking.deposit));
-  document.getElementById("pricingNote").textContent = getPricingDescription(gear, new Date(booking.start), new Date(booking.end));
+  document.getElementById("pricingNote").textContent = getPricingDescription(gear, new Date(booking.start), new Date(booking.end), booking.id);
   document.getElementById("confirmedEmail").textContent = booking.email;
   document.getElementById("confirmedReference").textContent = booking.reference;
+  
+  if (booking.paymentRefNumber) {
+    document.getElementById("userPaymentRef").value = booking.paymentRefNumber;
+  }
+
   document.getElementById("publicBookingForm").style.display = "none";
 
   updateBookingStatusUI(booking);
