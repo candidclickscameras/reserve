@@ -6,13 +6,18 @@
 
   <title>Candid Clicks | Reserve Camera Gear</title>
 
+  <!-- Google Fonts matching logo typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Sacramento&display=swap" rel="stylesheet">
+
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
     :root {
-      --brand-blue: #315aa6;
-      --brand-blue-dark: #244889;
+      --brand-blue: #2b52ba;
+      --brand-blue-dark: #1b388a;
       --cream: #fff1c9;
       --cream-soft: #fff8e7;
       --bg: #eef3fb;
@@ -26,8 +31,13 @@
       --orange-soft: #fef3c7;
       --red: #dc2626;
       --red-soft: #fee2e2;
-      --shadow: 0 20px 50px rgba(35, 68, 130, 0.12);
+      --shadow: 0 20px 50px rgba(27, 56, 138, 0.15);
       --radius: 18px;
+      
+      /* Brand Fonts */
+      --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-script: 'Sacramento', cursive;
     }
 
     * {
@@ -37,20 +47,13 @@
     body {
       margin: 0;
       min-height: 100vh;
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
+      font-family: var(--font-body);
       background:
         linear-gradient(
           180deg,
           var(--brand-blue) 0,
-          var(--brand-blue) 300px,
-          var(--bg) 300px,
+          var(--brand-blue) 320px,
+          var(--bg) 320px,
           var(--bg) 100%
         );
 
@@ -72,37 +75,39 @@
 
     .logo {
       display: block;
-      width: min(250px, 70vw);
-      max-height: 190px;
+      width: min(280px, 75vw);
+      max-height: 200px;
       object-fit: contain;
-      margin: 0 auto 12px;
-      border-radius: 18px;
+      margin: 0 auto 8px;
     }
 
     .brand-header h1 {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(26px, 6vw, 38px);
-      font-weight: 600;
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 6vw, 40px);
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
     .brand-header p {
-      margin: 7px 0 0;
+      margin: 4px 0 0;
       color: rgba(255,255,255,.9);
-      font-size: 14px;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
     }
 
     .card {
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 25px;
+      padding: 28px;
     }
 
     .card-title {
       margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 27px;
+      font-family: var(--font-heading);
+      font-size: 28px;
       color: var(--brand-blue-dark);
     }
 
@@ -138,7 +143,7 @@
       border-radius: 11px;
       background: #f8fafc;
       color: var(--text);
-      font: inherit;
+      font-family: var(--font-body);
       font-size: 15px;
       outline: none;
     }
@@ -147,7 +152,7 @@
     select:focus {
       background: white;
       border-color: var(--brand-blue);
-      box-shadow: 0 0 0 4px rgba(49,90,166,.10);
+      box-shadow: 0 0 0 4px rgba(43,82,186,.12);
     }
 
     .date-grid {
@@ -190,8 +195,8 @@
       min-height: 50px;
       border: 0;
       border-radius: 11px;
-      font: inherit;
-      font-weight: 800;
+      font-family: var(--font-body);
+      font-weight: 700;
       font-size: 15px;
       cursor: pointer;
     }
@@ -199,7 +204,7 @@
     .primary-btn {
       background: var(--brand-blue);
       color: white;
-      box-shadow: 0 8px 18px rgba(46,89,167,.20);
+      box-shadow: 0 8px 18px rgba(43,82,186,.25);
     }
 
     .primary-btn:hover {
@@ -242,7 +247,7 @@
 
     .summary-header h3 {
       margin: 0 0 5px;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: var(--font-heading);
       font-size: 24px;
     }
 
@@ -257,7 +262,7 @@
       padding: 7px 11px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
     }
 
     .status.pending {
@@ -323,13 +328,14 @@
       margin-top: 11px;
       border-top: 1px solid #ead9aa;
       font-size: 18px;
-      font-weight: 900;
+      font-weight: 800;
       color: var(--brand-blue-dark);
+      font-family: var(--font-heading);
     }
 
     .pricing-note {
       margin: 9px 0 0;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--muted);
     }
 
@@ -354,7 +360,7 @@
     .payment-safe-note {
       padding: 11px;
       margin-top: 13px;
-      border-radius: 9px;
+      border-radius: 99px;
       background: #ecfdf5;
       color: #166534;
       font-size: 12px;
@@ -372,6 +378,7 @@
 
     .confirmed-box h4 {
       margin: 0 0 7px;
+      font-family: var(--font-heading);
     }
 
     .empty-inventory {
@@ -387,7 +394,7 @@
       display: none;
       margin-top: 10px;
       padding: 10px 12px;
-      border-radius: 9px;
+      border-radius: 99px;
       background: var(--red-soft);
       color: #991b1b;
       font-size: 12px;
@@ -426,7 +433,7 @@
   <header class="brand-header">
 
     <img
-      src="candid-clicks-logo.png"
+      src="candid clicks logo.png"
       class="logo"
       alt="Candid Clicks"
       onerror="this.style.display='none'"
@@ -434,7 +441,7 @@
 
     <h1>Reserve Camera Gear</h1>
 
-    <p>Capturing moments, creating memories.</p>
+    <p>capturing moments, creating memories</p>
 
   </header>
 
@@ -1122,7 +1129,6 @@ function renderSelect() {
       option.value =
         String(unit.id);
 
-      // Display only the unit name in the dropdown
       option.textContent = unit.name;
 
       select.appendChild(
@@ -1243,25 +1249,28 @@ function getPricingDescription(
       duration.hours / 24
     );
 
+  const startFormatted = formatDate(start);
+
+  let text = `Available starting ${startFormatted}. `;
 
   if (
     duration.hours < 24
   ) {
 
-    return "Daily rate applied for rentals under 24 hours.";
+    return text + "Daily rate applied for rentals under 24 hours.";
 
   }
 
 
   if (days <= 3) {
 
-    return `Daily rate applied for ${days} day(s).`;
+    return text + `Daily rate applied for ${days} day(s).`;
 
   }
 
 
   return (
-    `Multi-day rate of ₱${money(
+    text + `Multi-day rate of ₱${money(
       getMultiDayRate(gear)
     )}/day applied for ${days} day(s).`
   );
