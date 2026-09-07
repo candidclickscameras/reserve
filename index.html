@@ -6,16 +6,15 @@
 
   <title>Candid Clicks | Camera Reservation</title>
 
-  <!-- Google Fonts Imports -->
+  <!-- Google Fonts: JetBrains Mono for Titles & Plus Jakarta Sans for Body -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
-    /* DIRECT FONT FAMILIES WITH FALLBACKS */
     :root {
       --brand-blue: #2b52ba;
       --brand-blue-dark: #1b388a;
@@ -35,7 +34,7 @@
       --radius: 18px;
       
       /* Typography Variables */
-      --font-title: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-title: 'JetBrains Mono', Consolas, Monaco, 'Courier New', monospace;
       --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
@@ -75,9 +74,9 @@
     .brand-header h1 {
       margin: 0;
       font-family: var(--font-title) !important;
-      font-size: clamp(34px, 7vw, 48px);
+      font-size: clamp(32px, 6.5vw, 44px);
       font-weight: 800;
-      letter-spacing: -0.5px;
+      letter-spacing: -1px;
     }
 
     .brand-header p {
@@ -98,10 +97,10 @@
     .card-title {
       margin: 0;
       font-family: var(--font-title) !important;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       color: var(--brand-blue-dark);
-      letter-spacing: -0.3px;
+      letter-spacing: -0.5px;
     }
 
     .card-subtitle {
@@ -241,7 +240,7 @@
     .summary-header h3 {
       margin: 0 0 5px;
       font-family: var(--font-title) !important;
-      font-size: 24px;
+      font-size: 22px;
     }
 
     .reference {
@@ -320,7 +319,7 @@
       padding-top: 11px;
       margin-top: 11px;
       border-top: 1px solid #ead9aa;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--brand-blue-dark);
       font-family: var(--font-title) !important;
@@ -344,7 +343,7 @@
     .payment-section h4 {
       font-family: var(--font-title) !important;
       margin: 0 0 10px;
-      font-size: 20px;
+      font-size: 18px;
     }
 
     .qr {
