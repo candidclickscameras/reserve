@@ -6,7 +6,7 @@
 
   <title>Candid Clicks | Camera Reservation</title>
 
-  <!-- Google Fonts: Playfair Display for Titles, Poppins for Everything Else -->
+  <!-- Google Fonts: Playfair Display for Titles & Poppins for Everything Else -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -51,8 +51,8 @@
         linear-gradient(
           180deg,
           var(--brand-blue) 0,
-          var(--brand-blue) 320px,
-          var(--bg) 320px,
+          var(--brand-blue) 280px,
+          var(--bg) 280px,
           var(--bg) 100%
         );
 
@@ -63,27 +63,19 @@
       width: 100%;
       max-width: 720px;
       margin: 0 auto;
-      padding: 30px 18px 60px;
+      padding: 40px 18px 60px;
     }
 
     .brand-header {
       text-align: center;
       color: white;
-      padding: 5px 0 28px;
-    }
-
-    .logo {
-      display: block;
-      width: min(280px, 75vw);
-      max-height: 200px;
-      object-fit: contain;
-      margin: 0 auto 12px;
+      padding: 10px 0 32px;
     }
 
     .brand-header h1 {
       margin: 0;
       font-family: var(--font-title);
-      font-size: clamp(30px, 6vw, 44px);
+      font-size: clamp(34px, 7vw, 48px);
       font-weight: 700;
       letter-spacing: 0.5px;
     }
@@ -347,6 +339,12 @@
       border: 1px solid var(--border);
     }
 
+    .payment-section h4 {
+      font-family: var(--font-title);
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
     .qr {
       display: block;
       width: min(220px, 70vw);
@@ -430,13 +428,6 @@
 <div class="page">
 
   <header class="brand-header">
-
-    <!-- Direct embed URL converted from Google Drive sharing link -->
-    <img
-      src="https://lh3.googleusercontent.com/d/1mNZ1_hMR8CmMYdNyeeh4ifvjeuQKK8xM"
-      class="logo"
-      alt="Candid Clicks Logo"
-    >
 
     <h1>Candid Clicks</h1>
 
