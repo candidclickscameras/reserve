@@ -329,6 +329,7 @@
       margin: 9px 0 0;
       font-size: 12px;
       color: var(--muted);
+      line-height: 1.5;
     }
 
     .payment-section {
@@ -684,15 +685,62 @@ function calculateRentalPrice(gear, start, end) {
   return days * getMultiDayRate(gear);
 }
 
+function getNextAvailableDate(camId, start, gear) {
+  const bufferMinutes = Number(gear.buffer || 0);
+  
+  // Get all active overlapping or future bookings for this unit
+  const activeBookings = bookings.filter(booking => {
+    if (String(booking.camId) !== String(camId)) return false;
+    if (booking.status === "Cancelled" || booking.status === "Canceled") return false;
+    return true;
+  });
+
+  // Check if current requested slot overlaps
+  const isConflicting = activeBookings.some(booking => {
+    const bookingStart = new Date(booking.start);
+    const bookingEnd = new Date(booking.end);
+    const protectedStart = new Date(bookingStart.getTime() - bufferMinutes * 60000);
+    const protectedEnd = new Date(bookingEnd.getTime() + bufferMinutes * 60000);
+    return start < protectedEnd && start >= protectedStart;
+  });
+
+  if (!isConflicting) {
+    return null; // Free during selected time
+  }
+
+  // Calculate the end time of the conflicting booking + buffer
+  let latestEnd = start;
+  activeBookings.forEach(booking => {
+    const bEnd = new Date(new Date(booking.end).getTime() + bufferMinutes * 60000);
+    if (bEnd > latestEnd) {
+      latestEnd = bEnd;
+    }
+  });
+
+  return latestEnd;
+}
+
 function getPricingDescription(gear, start, end) {
   const duration = getDuration(start, end);
   const days = Math.ceil(duration.hours / 24);
-  const startFormatted = formatDate(start);
+  const nextAvailable = getNextAvailableDate(gear.id, start, gear);
 
-  let text = `Available starting ${startFormatted}. `;
-  if (duration.hours < 24) return text + "Daily rate applied for rentals under 24 hours.";
-  if (days <= 3) return text + `Daily rate applied for ${days} day(s).`;
-  return text + `Multi-day rate of ₱${money(getMultiDayRate(gear))}/day applied for ${days} day(s).`;
+  let availabilityNote = "";
+  if (nextAvailable) {
+    availabilityNote = `⚠️ Currently reserved during your chosen time. Next available starting ${formatDate(nextAvailable)}. `;
+  } else {
+    availabilityNote = `✓ Available starting ${formatDate(start)}. `;
+  }
+
+  if (duration.hours < 24) {
+    return availabilityNote + "Daily rate applied for rentals under 24 hours.";
+  }
+
+  if (days <= 3) {
+    return availabilityNote + `Daily rate applied for ${days} day(s).`;
+  }
+
+  return availabilityNote + `Multi-day rate of ₱${money(getMultiDayRate(gear))}/day applied for ${days} day(s).`;
 }
 
 function bookingHasConflict(camId, start, end, gear) {
@@ -757,7 +805,9 @@ function submitBooking(event) {
   }
 
   if (bookingHasConflict(camId, start, end, gear)) {
-    return showFormError("This camera unit is unavailable during the selected rental period. Please choose another unit or time.");
+    const nextFree = getNextAvailableDate(camId, start, gear);
+    const freeMsg = nextFree ? ` Next available date & time: ${formatDate(nextFree)}.` : '';
+    return showFormError(`This camera unit is unavailable during the selected rental period.${freeMsg}`);
   }
 
   const rentalPrice = calculateRentalPrice(gear, start, end);
