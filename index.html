@@ -6,10 +6,10 @@
 
   <title>Candid Clicks | Camera Reservation</title>
 
-  <!-- Google Fonts: Playfair Display for Titles & Poppins for Everything Else -->
+  <!-- Google Fonts: Playfair Display + Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -34,9 +34,9 @@
       --shadow: 0 20px 50px rgba(27, 56, 138, 0.15);
       --radius: 18px;
       
-      /* Typography Settings */
+      /* Updated Typography */
       --font-title: 'Playfair Display', Georgia, serif;
-      --font-body: 'Poppins', system-ui, -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     }
 
     * {
@@ -77,7 +77,7 @@
       font-family: var(--font-title);
       font-size: clamp(34px, 7vw, 48px);
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: -0.5px;
     }
 
     .brand-header p {
@@ -85,7 +85,7 @@
       color: rgba(255,255,255,.9);
       font-size: 15px;
       font-weight: 400;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
     }
 
     .card {
@@ -100,6 +100,7 @@
       font-family: var(--font-title);
       font-size: 28px;
       color: var(--brand-blue-dark);
+      letter-spacing: -0.3px;
     }
 
     .card-subtitle {
@@ -428,2103 +429,545 @@
 <div class="page">
 
   <header class="brand-header">
-
     <h1>Candid Clicks</h1>
-
     <p>capturing moments, creating memories</p>
-
   </header>
 
-
   <main class="card">
-
-    <h2 class="card-title">
-      Camera Reservation
-    </h2>
-
+    <h2 class="card-title">Camera Reservation</h2>
     <p class="card-subtitle">
       Choose your camera unit, rental period, and contact information.
       All fields are required.
     </p>
 
-
     <form id="publicBookingForm" novalidate>
-
       <div class="field">
-
         <label for="cameraSelect">
-          Camera Unit
-          <span class="required">*</span>
+          Camera Unit <span class="required">*</span>
         </label>
-
         <select id="cameraSelect" required>
-          <option value="">
-            Loading camera units...
-          </option>
+          <option value="">Loading camera units...</option>
         </select>
-
-        <div
-          id="inventoryMessage"
-          class="empty-inventory"
-          style="display:none"
-        ></div>
-
+        <div id="inventoryMessage" class="empty-inventory" style="display:none"></div>
       </div>
-
 
       <div class="date-grid">
-
         <div class="field">
-
           <label for="startTime">
-            Start Date & Time
-            <span class="required">*</span>
+            Start Date & Time <span class="required">*</span>
           </label>
-
-          <input
-            type="datetime-local"
-            id="startTime"
-            required
-          >
-
+          <input type="datetime-local" id="startTime" required>
         </div>
-
 
         <div class="field">
-
           <label for="endTime">
-            End Date & Time
-            <span class="required">*</span>
+            End Date & Time <span class="required">*</span>
           </label>
-
-          <input
-            type="datetime-local"
-            id="endTime"
-            required
-          >
-
+          <input type="datetime-local" id="endTime" required>
         </div>
-
       </div>
 
-
       <div class="field">
-
         <label for="custName">
-          Full Name
-          <span class="required">*</span>
+          Full Name <span class="required">*</span>
         </label>
-
-        <input
-          type="text"
-          id="custName"
-          placeholder="e.g. Juan Cruz"
-          minlength="2"
-          required
-        >
-
+        <input type="text" id="custName" placeholder="e.g. Juan Cruz" minlength="2" required>
       </div>
-
 
       <div class="field">
-
         <label for="custEmail">
-          Email Address
-          <span class="required">*</span>
+          Email Address <span class="required">*</span>
         </label>
-
-        <input
-          type="email"
-          id="custEmail"
-          placeholder="e.g. juan@email.com"
-          required
-        >
-
+        <input type="email" id="custEmail" placeholder="e.g. juan@email.com" required>
       </div>
-
 
       <div class="safe-payment">
-
         <div class="safe-icon">🔒</div>
-
         <div>
-
-          <strong>
-            Safe & Secure Payment Process
-          </strong>
-
-          <br>
-
+          <strong>Safe & Secure Payment Process</strong><br>
           We do <strong>not collect payment information on this website.</strong>
-
-          Payment is made separately through the official
-          Candid Clicks QR code.
-
-          <br><br>
-
-          Never enter your card number,
-          banking password, or OTP on this page.
-
+          Payment is made separately through the official Candid Clicks QR code.<br><br>
+          Never enter your card number, banking password, or OTP on this page.
         </div>
-
       </div>
 
-
-      <button
-        type="submit"
-        class="primary-btn"
-        id="submitButton"
-      >
+      <button type="submit" class="primary-btn" id="submitButton">
         Request Reservation
       </button>
 
-
-      <div
-        id="formError"
-        class="error-note"
-      ></div>
-
+      <div id="formError" class="error-note"></div>
     </form>
 
-
-
     <section id="bookingSummary">
-
       <div class="summary-card">
-
         <div class="summary-header">
-
-          <h3 id="summaryTitle">
-            Reservation Submitted
-          </h3>
-
+          <h3 id="summaryTitle">Reservation Submitted</h3>
           <div class="reference">
-
-            Reference No:
-
-            <strong id="bookingReference">
-              —
-            </strong>
-
+            Reference No: <strong id="bookingReference">—</strong>
           </div>
-
-
-          <div
-            id="statusBadge"
-            class="status pending"
-          >
+          <div id="statusBadge" class="status pending">
             ● Awaiting Payment Verification
           </div>
-
         </div>
-
-
 
         <div class="summary-body">
-
           <div class="booking-details">
-
             <div class="detail-row">
-              <span class="detail-label">
-                Camera Unit
-              </span>
-
-              <span
-                class="detail-value"
-                id="summaryCamera"
-              ></span>
+              <span class="detail-label">Camera Unit</span>
+              <span class="detail-value" id="summaryCamera"></span>
             </div>
-
-
             <div class="detail-row">
-              <span class="detail-label">
-                Customer
-              </span>
-
-              <span
-                class="detail-value"
-                id="summaryCustomer"
-              ></span>
+              <span class="detail-label">Customer</span>
+              <span class="detail-value" id="summaryCustomer"></span>
             </div>
-
-
             <div class="detail-row">
-              <span class="detail-label">
-                Email
-              </span>
-
-              <span
-                class="detail-value"
-                id="summaryEmail"
-              ></span>
+              <span class="detail-label">Email</span>
+              <span class="detail-value" id="summaryEmail"></span>
             </div>
-
-
             <div class="detail-row">
-              <span class="detail-label">
-                Rental Period
-              </span>
-
-              <span
-                class="detail-value"
-                id="summaryPeriod"
-              ></span>
+              <span class="detail-label">Rental Period</span>
+              <span class="detail-value" id="summaryPeriod"></span>
             </div>
-
-
             <div class="detail-row">
-              <span class="detail-label">
-                Duration
-              </span>
-
-              <span
-                class="detail-value"
-                id="summaryDuration"
-              ></span>
+              <span class="detail-label">Duration</span>
+              <span class="detail-value" id="summaryDuration"></span>
             </div>
-
           </div>
-
-
 
           <div class="price-box">
-
             <div class="price-line">
-
-              <span>
-                Rental Fee
-              </span>
-
-              <strong>
-                ₱<span id="rentalFee">0</span>
-              </strong>
-
+              <span>Rental Fee</span>
+              <strong>₱<span id="rentalFee">0</span></strong>
             </div>
-
-
             <div class="price-line">
-
-              <span>
-                Security Deposit
-              </span>
-
-              <strong>
-                ₱<span id="secDeposit">0</span>
-              </strong>
-
+              <span>Security Deposit</span>
+              <strong>₱<span id="secDeposit">0</span></strong>
             </div>
-
-
             <div class="price-line total-line">
-
-              <span>
-                Total Amount Due
-              </span>
-
-              <strong>
-                ₱<span id="totalDue">0</span>
-              </strong>
-
+              <span>Total Amount Due</span>
+              <strong>₱<span id="totalDue">0</span></strong>
             </div>
-
-
-            <p
-              class="pricing-note"
-              id="pricingNote"
-            ></p>
-
+            <p class="pricing-note" id="pricingNote"></p>
           </div>
 
-
-
-          <div
-            id="paymentSection"
-            class="payment-section"
-          >
-
-            <h4>
-              Complete Your Payment
-            </h4>
-
-            <p>
-              Scan the official Candid Clicks payment QR code.
-            </p>
-
-            <p>
-              <strong>
-                GCash / Maya / Bank
-              </strong>
-            </p>
-
-
-            <img
-              src="payment-qr.png"
-              class="qr"
-              alt="Candid Clicks Payment QR Code"
-            >
-
-
-            <p>
-
-              <strong>
-
-                Reference No:
-
-                <span id="paymentReference">
-                  —
-                </span>
-
-              </strong>
-
-            </p>
-
-
+          <div id="paymentSection" class="payment-section">
+            <h4>Complete Your Payment</h4>
+            <p>Scan the official Candid Clicks payment QR code.</p>
+            <p><strong>GCash / Maya / Bank</strong></p>
+            <img src="payment-qr.png" class="qr" alt="Candid Clicks Payment QR Code">
+            <p><strong>Reference No: <span id="paymentReference">—</span></strong></p>
             <div class="payment-safe-note">
-
-              🔒
-
-              <strong>
-                No payment is processed on this website.
-              </strong>
-
-              <br>
-
+              🔒 <strong>No payment is processed on this website.</strong><br>
               We only display the official payment QR code.
-
             </div>
-
           </div>
 
-
-
-          <div
-            id="confirmedBox"
-            class="confirmed-box"
-          >
-
-            <h4>
-              ✓ Payment Confirmed
-            </h4>
-
-            <p>
-              Your payment has been verified and your reservation
-              is now confirmed.
-            </p>
-
-            <p>
-
-              A confirmation email will be sent to:
-
-              <strong id="confirmedEmail">
-                —
-              </strong>
-
-            </p>
-
-            <p>
-
-              Reference No:
-
-              <strong id="confirmedReference">
-                —
-              </strong>
-
-            </p>
-
+          <div id="confirmedBox" class="confirmed-box">
+            <h4>✓ Payment Confirmed</h4>
+            <p>Your payment has been verified and your reservation is now confirmed.</p>
+            <p>A confirmation email will be sent to: <strong id="confirmedEmail">—</strong></p>
+            <p>Reference No: <strong id="confirmedReference">—</strong></p>
           </div>
 
-
-
-          <button
-            type="button"
-            id="cancelBookingButton"
-            class="cancel-btn"
-          >
+          <button type="button" id="cancelBookingButton" class="cancel-btn">
             Cancel My Unpaid Booking
           </button>
-
         </div>
-
       </div>
-
     </section>
-
   </main>
-
 </div>
 
-
-
 <script>
-
-/* ============================================================
-   CONFIGURATION
-   ============================================================ */
-
-const EMAILJS_PUBLIC_KEY =
-  "YOUR_EMAILJS_PUBLIC_KEY";
-
-const EMAILJS_SERVICE_ID =
-  "YOUR_EMAILJS_SERVICE_ID";
-
-const EMAILJS_TEMPLATE_ID =
-  "YOUR_EMAILJS_TEMPLATE_ID";
-
-
+const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
+const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
 const STATUS_CHECK_INTERVAL = 1500;
 
-
-/* ============================================================
-   DATA
-   ============================================================ */
-
 let inventory = [];
-
 let bookings = [];
-
 let currentBookingId = null;
-
 let statusTimer = null;
 
-
-/* ============================================================
-   SAFE STORAGE HELPERS
-   ============================================================ */
-
 function getStorageData(key, fallback = []) {
-
   try {
-
-    const data =
-      localStorage.getItem(key);
-
-    if (!data) {
-      return fallback;
-    }
-
-    const parsed =
-      JSON.parse(data);
-
-    return Array.isArray(parsed)
-      ? parsed
-      : fallback;
-
+    const data = localStorage.getItem(key);
+    if (!data) return fallback;
+    const parsed = JSON.parse(data);
+    return Array.isArray(parsed) ? parsed : fallback;
   } catch (error) {
-
-    console.error(
-      `Could not read ${key}:`,
-      error
-    );
-
+    console.error(`Could not read ${key}:`, error);
     return fallback;
-
   }
-
 }
-
 
 function saveStorageData(key, data) {
-
-  localStorage.setItem(
-    key,
-    JSON.stringify(data)
-  );
-
+  localStorage.setItem(key, JSON.stringify(data));
 }
-
-
-/* ============================================================
-   HELPERS
-   ============================================================ */
 
 function money(value) {
-
-  return Number(value || 0)
-    .toLocaleString(
-      "en-PH",
-      {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2
-      }
-    );
-
+  return Number(value || 0).toLocaleString("en-PH", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 }
-
 
 function generateReference() {
-
   const now = new Date();
-
-  const date =
-    now.getFullYear() +
-    String(now.getMonth() + 1)
-      .padStart(2, "0") +
-    String(now.getDate())
-      .padStart(2, "0");
-
-  const random =
-    Math.floor(
-      1000 +
-      Math.random() * 9000
-    );
-
+  const date = now.getFullYear() + String(now.getMonth() + 1).padStart(2, "0") + String(now.getDate()).padStart(2, "0");
+  const random = Math.floor(1000 + Math.random() * 9000);
   return `CC-${date}-${random}`;
-
 }
-
 
 function formatDate(dateString) {
-
-  return new Date(
-    dateString
-  ).toLocaleString(
-    "en-PH",
-    {
-      dateStyle: "medium",
-      timeStyle: "short"
-    }
-  );
-
+  return new Date(dateString).toLocaleString("en-PH", { dateStyle: "medium", timeStyle: "short" });
 }
-
 
 function getDuration(start, end) {
-
-  const hours =
-    (
-      end.getTime() -
-      start.getTime()
-    ) / 36e5;
-
-  return {
-    hours,
-    days:
-      Math.ceil(hours / 24)
-  };
-
+  const hours = (end.getTime() - start.getTime()) / 36e5;
+  return { hours, days: Math.ceil(hours / 24) };
 }
-
 
 function formatDuration(hours) {
-
-  if (hours < 24) {
-
-    return `${Math.ceil(hours)} hour(s)`;
-
-  }
-
+  if (hours < 24) return `${Math.ceil(hours)} hour(s)`;
   return `${Math.ceil(hours / 24)} day(s)`;
-
 }
-
-
-/* ============================================================
-   INVENTORY
-   IMPORTANT:
-   MATCHES ADMIN DASHBOARD DATA STRUCTURE
-
-   {
-     id,
-     name,
-     daily,
-     multiDayRate,
-     deposit,
-     buffer
-   }
-   ============================================================ */
 
 function loadInventory() {
-
-  inventory =
-    getStorageData(
-      "gear_inv",
-      []
-    );
-
+  inventory = getStorageData("gear_inv", []);
   renderSelect();
-
 }
 
-
 function renderSelect() {
-
-  const select =
-    document.getElementById(
-      "cameraSelect"
-    );
-
-  const message =
-    document.getElementById(
-      "inventoryMessage"
-    );
-
-  const previousValue =
-    select.value;
-
+  const select = document.getElementById("cameraSelect");
+  const message = document.getElementById("inventoryMessage");
+  const previousValue = select.value;
 
   select.innerHTML = "";
 
-
   if (!inventory.length) {
-
-    select.innerHTML =
-      `
-      <option value="">
-        No camera units available
-      </option>
-      `;
-
+    select.innerHTML = `<option value="">No camera units available</option>`;
     select.disabled = true;
-
-    message.textContent =
-      "No camera units have been added from the Admin Dashboard yet.";
-
-    message.style.display =
-      "block";
-
+    message.textContent = "No camera units have been added from the Admin Dashboard yet.";
+    message.style.display = "block";
     return;
-
   }
-
 
   select.disabled = false;
+  message.style.display = "none";
 
-  message.style.display =
-    "none";
-
-
-  const placeholder =
-    document.createElement(
-      "option"
-    );
-
+  const placeholder = document.createElement("option");
   placeholder.value = "";
+  placeholder.textContent = "Select a camera unit...";
+  select.appendChild(placeholder);
 
-  placeholder.textContent =
-    "Select a camera unit...";
+  inventory.forEach(unit => {
+    const option = document.createElement("option");
+    option.value = String(unit.id);
+    option.textContent = unit.name;
+    select.appendChild(option);
+  });
 
-  select.appendChild(
-    placeholder
-  );
-
-
-  inventory.forEach(
-    unit => {
-
-      const option =
-        document.createElement(
-          "option"
-        );
-
-      option.value =
-        String(unit.id);
-
-      option.textContent = unit.name;
-
-      select.appendChild(
-        option
-      );
-
-    }
-  );
-
-
-  const stillExists =
-    inventory.some(
-      unit =>
-        String(unit.id) ===
-        String(previousValue)
-    );
-
-
-  if (
-    previousValue &&
-    stillExists
-  ) {
-
-    select.value =
-      previousValue;
-
+  if (previousValue && inventory.some(unit => String(unit.id) === String(previousValue))) {
+    select.value = previousValue;
   }
-
 }
-
-
-/* ============================================================
-   PRICING
-   EXACTLY MATCHES ADMIN:
-   1-3 DAYS = DAILY
-   4+ DAYS = multiDayRate
-   ============================================================ */
 
 function getMultiDayRate(gear) {
-
-  return Number(
-    gear.multiDayRate ??
-    gear.daily ??
-    0
-  );
-
+  return Number(gear.multiDayRate ?? gear.daily ?? 0);
 }
 
+function calculateRentalPrice(gear, start, end) {
+  const duration = getDuration(start, end);
+  const hours = duration.hours;
+  const days = Math.ceil(hours / 24);
 
-function calculateRentalPrice(
-  gear,
-  start,
-  end
-) {
-
-  const duration =
-    getDuration(
-      start,
-      end
-    );
-
-  const hours =
-    duration.hours;
-
-  const days =
-    Math.ceil(hours / 24);
-
-
-  /*
-     Your current Admin data does not
-     store an hourly rate.
-
-     For rentals under 24 hours,
-     charge one full daily rate.
-  */
-
-  if (hours < 24) {
-
-    return Number(
-      gear.daily || 0
-    );
-
-  }
-
-
-  if (days <= 3) {
-
-    return (
-      days *
-      Number(gear.daily || 0)
-    );
-
-  }
-
-
-  return (
-    days *
-    getMultiDayRate(gear)
-  );
-
+  if (hours < 24) return Number(gear.daily || 0);
+  if (days <= 3) return days * Number(gear.daily || 0);
+  return days * getMultiDayRate(gear);
 }
 
-
-function getPricingDescription(
-  gear,
-  start,
-  end
-) {
-
-  const duration =
-    getDuration(
-      start,
-      end
-    );
-
-  const days =
-    Math.ceil(
-      duration.hours / 24
-    );
-
+function getPricingDescription(gear, start, end) {
+  const duration = getDuration(start, end);
+  const days = Math.ceil(duration.hours / 24);
   const startFormatted = formatDate(start);
 
   let text = `Available starting ${startFormatted}. `;
-
-  if (
-    duration.hours < 24
-  ) {
-
-    return text + "Daily rate applied for rentals under 24 hours.";
-
-  }
-
-
-  if (days <= 3) {
-
-    return text + `Daily rate applied for ${days} day(s).`;
-
-  }
-
-
-  return (
-    text + `Multi-day rate of ₱${money(
-      getMultiDayRate(gear)
-    )}/day applied for ${days} day(s).`
-  );
-
+  if (duration.hours < 24) return text + "Daily rate applied for rentals under 24 hours.";
+  if (days <= 3) return text + `Daily rate applied for ${days} day(s).`;
+  return text + `Multi-day rate of ₱${money(getMultiDayRate(gear))}/day applied for ${days} day(s).`;
 }
 
+function bookingHasConflict(camId, start, end, gear) {
+  const bufferMinutes = Number(gear.buffer || 0);
+  return bookings.some(booking => {
+    if (String(booking.camId) !== String(camId)) return false;
+    if (booking.status === "Cancelled" || booking.status === "Canceled") return false;
 
-/* ============================================================
-   BOOKING CONFLICT
-   ============================================================ */
+    const bookingStart = new Date(booking.start);
+    const bookingEnd = new Date(booking.end);
+    const protectedStart = new Date(bookingStart.getTime() - bufferMinutes * 60000);
+    const protectedEnd = new Date(bookingEnd.getTime() + bufferMinutes * 60000);
 
-function bookingHasConflict(
-  camId,
-  start,
-  end,
-  gear
-) {
-
-  const bufferMinutes =
-    Number(
-      gear.buffer || 0
-    );
-
-
-  return bookings.some(
-    booking => {
-
-      if (
-        String(booking.camId) !==
-        String(camId)
-      ) {
-        return false;
-      }
-
-
-      if (
-        booking.status === "Cancelled" ||
-        booking.status === "Canceled"
-      ) {
-        return false;
-      }
-
-
-      const bookingStart =
-        new Date(
-          booking.start
-        );
-
-      const bookingEnd =
-        new Date(
-          booking.end
-        );
-
-
-      const protectedStart =
-        new Date(
-          bookingStart.getTime() -
-          bufferMinutes * 60000
-        );
-
-      const protectedEnd =
-        new Date(
-          bookingEnd.getTime() +
-          bufferMinutes * 60000
-        );
-
-
-      return (
-        start < protectedEnd &&
-        end > protectedStart
-      );
-
-    }
-  );
-
+    return start < protectedEnd && end > protectedStart;
+  });
 }
-
-
-/* ============================================================
-   FORM ERROR
-   ============================================================ */
 
 function showFormError(message) {
-
-  const box =
-    document.getElementById(
-      "formError"
-    );
-
-  box.textContent =
-    message;
-
-  box.style.display =
-    "block";
-
+  const box = document.getElementById("formError");
+  box.textContent = message;
+  box.style.display = "block";
 }
-
 
 function clearFormError() {
-
-  const box =
-    document.getElementById(
-      "formError"
-    );
-
+  const box = document.getElementById("formError");
   box.textContent = "";
-
-  box.style.display =
-    "none";
-
+  box.style.display = "none";
 }
 
-
-/* ============================================================
-   FORM SUBMISSION
-   ============================================================ */
-
-document
-  .getElementById(
-    "publicBookingForm"
-  )
-  .addEventListener(
-    "submit",
-    submitBooking
-  );
-
+document.getElementById("publicBookingForm").addEventListener("submit", submitBooking);
 
 function submitBooking(event) {
-
   event.preventDefault();
-
   clearFormError();
 
-
-  /*
-     ALWAYS RELOAD LATEST DATA
-     FROM ADMIN STORAGE
-  */
-
-  inventory =
-    getStorageData(
-      "gear_inv",
-      []
-    );
-
-  bookings =
-    getStorageData(
-      "gear_bookings",
-      []
-    );
-
-
-  const camId =
-    document
-      .getElementById(
-        "cameraSelect"
-      )
-      .value;
-
-
-  const startValue =
-    document
-      .getElementById(
-        "startTime"
-      )
-      .value;
-
-
-  const endValue =
-    document
-      .getElementById(
-        "endTime"
-      )
-      .value;
-
-
-  const name =
-    document
-      .getElementById(
-        "custName"
-      )
-      .value
-      .trim();
-
-
-  const email =
-    document
-      .getElementById(
-        "custEmail"
-      )
-      .value
-      .trim();
-
-
-  if (!camId) {
-
-    showFormError(
-      "Please select a camera unit."
-    );
-
-    return;
-
-  }
-
-
-  if (!startValue) {
-
-    showFormError(
-      "Please select the rental start date and time."
-    );
-
-    return;
-
-  }
-
-
-  if (!endValue) {
-
-    showFormError(
-      "Please select the rental end date and time."
-    );
-
-    return;
-
-  }
-
-
-  if (!name) {
-
-    showFormError(
-      "Please enter your full name."
-    );
-
-    return;
-
-  }
-
-
-  if (name.length < 2) {
-
-    showFormError(
-      "Please enter a valid full name."
-    );
-
-    return;
-
-  }
-
-
-  if (!email) {
-
-    showFormError(
-      "Please enter your email address."
-    );
-
-    return;
-
-  }
-
-
-  const emailInput =
-    document.getElementById(
-      "custEmail"
-    );
-
-
-  if (
-    !emailInput.checkValidity()
-  ) {
-
-    showFormError(
-      "Please enter a valid email address."
-    );
-
-    return;
-
-  }
-
-
-  const start =
-    new Date(
-      startValue
-    );
-
-  const end =
-    new Date(
-      endValue
-    );
-
-
-  if (
-    isNaN(start.getTime()) ||
-    isNaN(end.getTime())
-  ) {
-
-    showFormError(
-      "Please enter valid rental dates."
-    );
-
-    return;
-
-  }
-
-
-  if (start >= end) {
-
-    showFormError(
-      "The end date must be after the start date."
-    );
-
-    return;
-
-  }
-
-
-  if (
-    start < new Date()
-  ) {
-
-    showFormError(
-      "The rental start date cannot be in the past."
-    );
-
-    return;
-
-  }
-
-
-  const gear =
-    inventory.find(
-      item =>
-        String(item.id) ===
-        String(camId)
-    );
-
-
+  inventory = getStorageData("gear_inv", []);
+  bookings = getStorageData("gear_bookings", []);
+
+  const camId = document.getElementById("cameraSelect").value;
+  const startValue = document.getElementById("startTime").value;
+  const endValue = document.getElementById("endTime").value;
+  const name = document.getElementById("custName").value.trim();
+  const email = document.getElementById("custEmail").value.trim();
+
+  if (!camId) return showFormError("Please select a camera unit.");
+  if (!startValue) return showFormError("Please select the rental start date and time.");
+  if (!endValue) return showFormError("Please select the rental end date and time.");
+  if (!name || name.length < 2) return showFormError("Please enter a valid full name.");
+  if (!email || !document.getElementById("custEmail").checkValidity()) return showFormError("Please enter a valid email address.");
+
+  const start = new Date(startValue);
+  const end = new Date(endValue);
+
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) return showFormError("Please enter valid rental dates.");
+  if (start >= end) return showFormError("The end date must be after the start date.");
+  if (start < new Date()) return showFormError("The rental start date cannot be in the past.");
+
+  const gear = inventory.find(item => String(item.id) === String(camId));
   if (!gear) {
-
     loadInventory();
-
-    showFormError(
-      "This camera unit could no longer be found. Please select another unit."
-    );
-
-    return;
-
+    return showFormError("This camera unit could no longer be found. Please select another unit.");
   }
 
-
-  if (
-    bookingHasConflict(
-      camId,
-      start,
-      end,
-      gear
-    )
-  ) {
-
-    showFormError(
-      "This camera unit is unavailable during the selected rental period. Please choose another unit or time."
-    );
-
-    return;
-
+  if (bookingHasConflict(camId, start, end, gear)) {
+    return showFormError("This camera unit is unavailable during the selected rental period. Please choose another unit or time.");
   }
 
+  const rentalPrice = calculateRentalPrice(gear, start, end);
+  const deposit = Number(gear.deposit || 0);
+  const duration = getDuration(start, end);
 
-  const rentalPrice =
-    calculateRentalPrice(
-      gear,
-      start,
-      end
-    );
-
-
-  const deposit =
-    Number(
-      gear.deposit || 0
-    );
-
-
-  const duration =
-    getDuration(
-      start,
-      end
-    );
-
-
-  currentBookingId =
-    Date.now();
-
+  currentBookingId = Date.now();
 
   const newBooking = {
-
-    id:
-      currentBookingId,
-
-    reference:
-      generateReference(),
-
-    camId:
-      gear.id,
-
-    camName:
-      gear.name,
-
-    customer:
-      name,
-
-    email:
-      email,
-
-    start:
-      start.toISOString(),
-
-    end:
-      end.toISOString(),
-
-    durationHours:
-      duration.hours,
-
-    durationDays:
-      duration.days,
-
-    price:
-      rentalPrice,
-
-    deposit:
-      deposit,
-
-    paymentVerified:
-      false,
-
-    confirmationEmailSent:
-      false,
-
-    depositReturned:
-      false,
-
-    status:
-      "Pending Payment",
-
-    createdAt:
-      new Date().toISOString()
-
+    id: currentBookingId,
+    reference: generateReference(),
+    camId: gear.id,
+    camName: gear.name,
+    customer: name,
+    email: email,
+    start: start.toISOString(),
+    end: end.toISOString(),
+    durationHours: duration.hours,
+    durationDays: duration.days,
+    price: rentalPrice,
+    deposit: deposit,
+    paymentVerified: false,
+    confirmationEmailSent: false,
+    depositReturned: false,
+    status: "Pending Payment",
+    createdAt: new Date().toISOString()
   };
 
+  bookings.push(newBooking);
+  saveStorageData("gear_bookings", bookings);
+  sessionStorage.setItem("candid_clicks_current_booking", String(currentBookingId));
 
-  bookings.push(
-    newBooking
-  );
-
-
-  saveStorageData(
-    "gear_bookings",
-    bookings
-  );
-
-
-  sessionStorage.setItem(
-    "candid_clicks_current_booking",
-    String(currentBookingId)
-  );
-
-
-  showBookingSummary(
-    newBooking,
-    gear
-  );
-
-
+  showBookingSummary(newBooking, gear);
   startBookingStatusMonitor();
 
-
-  alert(
-    "Your reservation request has been submitted. Please complete your payment using the official QR code."
-  );
-
+  alert("Your reservation request has been submitted. Please complete your payment using the official QR code.");
 }
 
+function showBookingSummary(booking, gear) {
+  document.getElementById("bookingSummary").style.display = "block";
+  document.getElementById("bookingReference").textContent = booking.reference;
+  document.getElementById("paymentReference").textContent = booking.reference;
+  document.getElementById("summaryCamera").textContent = booking.camName;
+  document.getElementById("summaryCustomer").textContent = booking.customer;
+  document.getElementById("summaryEmail").textContent = booking.email;
+  document.getElementById("summaryPeriod").textContent = `${formatDate(booking.start)} → ${formatDate(booking.end)}`;
+  document.getElementById("summaryDuration").textContent = formatDuration(booking.durationHours);
+  document.getElementById("rentalFee").textContent = money(booking.price);
+  document.getElementById("secDeposit").textContent = money(booking.deposit);
+  document.getElementById("totalDue").textContent = money(Number(booking.price) + Number(booking.deposit));
+  document.getElementById("pricingNote").textContent = getPricingDescription(gear, new Date(booking.start), new Date(booking.end));
+  document.getElementById("confirmedEmail").textContent = booking.email;
+  document.getElementById("confirmedReference").textContent = booking.reference;
+  document.getElementById("publicBookingForm").style.display = "none";
 
-/* ============================================================
-   SHOW BOOKING SUMMARY
-   ============================================================ */
+  updateBookingStatusUI(booking);
 
-function showBookingSummary(
-  booking,
-  gear
-) {
-
-  document
-    .getElementById(
-      "bookingSummary"
-    )
-    .style.display =
-      "block";
-
-
-  document
-    .getElementById(
-      "bookingReference"
-    )
-    .textContent =
-      booking.reference;
-
-
-  document
-    .getElementById(
-      "paymentReference"
-    )
-    .textContent =
-      booking.reference;
-
-
-  document
-    .getElementById(
-      "summaryCamera"
-    )
-    .textContent =
-      booking.camName;
-
-
-  document
-    .getElementById(
-      "summaryCustomer"
-    )
-    .textContent =
-      booking.customer;
-
-
-  document
-    .getElementById(
-      "summaryEmail"
-    )
-    .textContent =
-      booking.email;
-
-
-  document
-    .getElementById(
-      "summaryPeriod"
-    )
-    .textContent =
-      `${formatDate(
-        booking.start
-      )} → ${formatDate(
-        booking.end
-      )}`;
-
-
-  document
-    .getElementById(
-      "summaryDuration"
-    )
-    .textContent =
-      formatDuration(
-        booking.durationHours
-      );
-
-
-  document
-    .getElementById(
-      "rentalFee"
-    )
-    .textContent =
-      money(
-        booking.price
-      );
-
-
-  document
-    .getElementById(
-      "secDeposit"
-    )
-    .textContent =
-      money(
-        booking.deposit
-      );
-
-
-  document
-    .getElementById(
-      "totalDue"
-    )
-    .textContent =
-      money(
-        Number(
-          booking.price
-        ) +
-        Number(
-          booking.deposit
-        )
-      );
-
-
-  document
-    .getElementById(
-      "pricingNote"
-    )
-    .textContent =
-      getPricingDescription(
-        gear,
-        new Date(
-          booking.start
-        ),
-        new Date(
-          booking.end
-        )
-      );
-
-
-  document
-    .getElementById(
-      "confirmedEmail"
-    )
-    .textContent =
-      booking.email;
-
-
-  document
-    .getElementById(
-      "confirmedReference"
-    )
-    .textContent =
-      booking.reference;
-
-
-  document
-    .getElementById(
-      "publicBookingForm"
-    )
-    .style.display =
-      "none";
-
-
-  updateBookingStatusUI(
-    booking
-  );
-
-
-  setTimeout(
-    () => {
-
-      document
-        .getElementById(
-          "bookingSummary"
-        )
-        .scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-    },
-    100
-  );
-
+  setTimeout(() => {
+    document.getElementById("bookingSummary").scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 100);
 }
-
-
-/* ============================================================
-   PAYMENT STATUS MONITOR
-   ============================================================ */
 
 function startBookingStatusMonitor() {
-
   stopBookingStatusMonitor();
-
-
-  statusTimer =
-    setInterval(
-      checkCurrentBookingStatus,
-      STATUS_CHECK_INTERVAL
-    );
-
-
+  statusTimer = setInterval(checkCurrentBookingStatus, STATUS_CHECK_INTERVAL);
   checkCurrentBookingStatus();
-
 }
-
 
 function stopBookingStatusMonitor() {
-
   if (statusTimer) {
-
-    clearInterval(
-      statusTimer
-    );
-
+    clearInterval(statusTimer);
     statusTimer = null;
-
   }
-
 }
-
 
 function checkCurrentBookingStatus() {
+  if (!currentBookingId) return;
+  bookings = getStorageData("gear_bookings", []);
+  const booking = bookings.find(item => String(item.id) === String(currentBookingId));
+  if (!booking) return;
 
-  if (!currentBookingId) {
-    return;
-  }
-
-
-  bookings =
-    getStorageData(
-      "gear_bookings",
-      []
-    );
-
-
-  const booking =
-    bookings.find(
-      item =>
-        String(item.id) ===
-        String(currentBookingId)
-    );
-
-
-  if (!booking) {
-    return;
-  }
-
-
-  updateBookingStatusUI(
-    booking
-  );
-
-
-  const isConfirmed =
-    booking.paymentVerified === true ||
-    booking.status === "Confirmed" ||
-    booking.status === "Paid";
-
-
-  if (isConfirmed) {
-
+  updateBookingStatusUI(booking);
+  if (booking.paymentVerified === true || booking.status === "Confirmed" || booking.status === "Paid") {
     stopBookingStatusMonitor();
-
   }
-
 }
 
+function updateBookingStatusUI(booking) {
+  const badge = document.getElementById("statusBadge");
+  const paymentSection = document.getElementById("paymentSection");
+  const confirmedBox = document.getElementById("confirmedBox");
+  const cancelButton = document.getElementById("cancelBookingButton");
+  const title = document.getElementById("summaryTitle");
 
-/* ============================================================
-   STATUS UI
-   ============================================================ */
-
-function updateBookingStatusUI(
-  booking
-) {
-
-  const badge =
-    document.getElementById(
-      "statusBadge"
-    );
-
-  const paymentSection =
-    document.getElementById(
-      "paymentSection"
-    );
-
-  const confirmedBox =
-    document.getElementById(
-      "confirmedBox"
-    );
-
-  const cancelButton =
-    document.getElementById(
-      "cancelBookingButton"
-    );
-
-  const title =
-    document.getElementById(
-      "summaryTitle"
-    );
-
-
-  const isConfirmed =
-    booking.paymentVerified === true ||
-    booking.status === "Confirmed" ||
-    booking.status === "Paid";
-
-
-  const isCancelled =
-    booking.status === "Cancelled" ||
-    booking.status === "Canceled";
-
+  const isConfirmed = booking.paymentVerified === true || booking.status === "Confirmed" || booking.status === "Paid";
+  const isCancelled = booking.status === "Cancelled" || booking.status === "Canceled";
 
   if (isConfirmed) {
-
-    badge.className =
-      "status confirmed";
-
-    badge.textContent =
-      "✓ Payment Confirmed";
-
-
-    title.textContent =
-      "Reservation Confirmed";
-
-
-    paymentSection.style.display =
-      "none";
-
-    confirmedBox.style.display =
-      "block";
-
-    cancelButton.style.display =
-      "none";
-
-
-    sendConfirmationEmailOnce(
-      booking
-    );
-
+    badge.className = "status confirmed";
+    badge.textContent = "✓ Payment Confirmed";
+    title.textContent = "Reservation Confirmed";
+    paymentSection.style.display = "none";
+    confirmedBox.style.display = "block";
+    cancelButton.style.display = "none";
+    sendConfirmationEmailOnce(booking);
     return;
-
   }
-
 
   if (isCancelled) {
-
-    badge.className =
-      "status cancelled";
-
-    badge.textContent =
-      "✕ Booking Cancelled";
-
-
-    title.textContent =
-      "Reservation Cancelled";
-
-
-    paymentSection.style.display =
-      "none";
-
-    confirmedBox.style.display =
-      "none";
-
-    cancelButton.style.display =
-      "none";
-
+    badge.className = "status cancelled";
+    badge.textContent = "✕ Booking Cancelled";
+    title.textContent = "Reservation Cancelled";
+    paymentSection.style.display = "none";
+    confirmedBox.style.display = "none";
+    cancelButton.style.display = "none";
     return;
-
   }
 
-
-  badge.className =
-    "status pending";
-
-  badge.textContent =
-    "● Awaiting Payment Verification";
-
-
-  title.textContent =
-    "Reservation Submitted";
-
-
-  paymentSection.style.display =
-    "block";
-
-  confirmedBox.style.display =
-    "none";
-
-  cancelButton.style.display =
-    "block";
-
+  badge.className = "status pending";
+  badge.textContent = "● Awaiting Payment Verification";
+  title.textContent = "Reservation Submitted";
+  paymentSection.style.display = "block";
+  confirmedBox.style.display = "none";
+  cancelButton.style.display = "block";
 }
 
-
-/* ============================================================
-   EMAIL CONFIRMATION
-   ============================================================ */
-
-async function sendConfirmationEmailOnce(
-  booking
-) {
-
-  if (
-    booking.confirmationEmailSent === true
-  ) {
+async function sendConfirmationEmailOnce(booking) {
+  if (booking.confirmationEmailSent === true) return;
+  if (EMAILJS_PUBLIC_KEY.startsWith("YOUR_") || EMAILJS_SERVICE_ID.startsWith("YOUR_") || EMAILJS_TEMPLATE_ID.startsWith("YOUR_")) {
+    console.warn("EmailJS is not configured.");
     return;
   }
-
-
-  if (
-    EMAILJS_PUBLIC_KEY.startsWith(
-      "YOUR_"
-    ) ||
-
-    EMAILJS_SERVICE_ID.startsWith(
-      "YOUR_"
-    ) ||
-
-    EMAILJS_TEMPLATE_ID.startsWith(
-      "YOUR_"
-    )
-  ) {
-
-    console.warn(
-      "EmailJS is not configured."
-    );
-
-    return;
-
-  }
-
 
   try {
-
-    emailjs.init({
-      publicKey:
-        EMAILJS_PUBLIC_KEY
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email: booking.email,
+      customer_name: booking.customer,
+      reference: booking.reference,
+      camera_name: booking.camName,
+      start_date: formatDate(booking.start),
+      end_date: formatDate(booking.end),
+      rental_fee: `₱${money(booking.price)}`,
+      security_deposit: `₱${money(booking.deposit)}`,
+      total_amount: `₱${money(Number(booking.price) + Number(booking.deposit))}`
     });
 
-
-    await emailjs.send(
-
-      EMAILJS_SERVICE_ID,
-
-      EMAILJS_TEMPLATE_ID,
-
-      {
-
-        to_email:
-          booking.email,
-
-        customer_name:
-          booking.customer,
-
-        reference:
-          booking.reference,
-
-        camera_name:
-          booking.camName,
-
-        start_date:
-          formatDate(
-            booking.start
-          ),
-
-        end_date:
-          formatDate(
-            booking.end
-          ),
-
-        rental_fee:
-          `₱${money(
-            booking.price
-          )}`,
-
-        security_deposit:
-          `₱${money(
-            booking.deposit
-          )}`,
-
-        total_amount:
-          `₱${money(
-            Number(
-              booking.price
-            ) +
-            Number(
-              booking.deposit
-            )
-          )}`
-
-      }
-
-    );
-
-
-    bookings =
-      getStorageData(
-        "gear_bookings",
-        []
-      );
-
-
-    const index =
-      bookings.findIndex(
-        item =>
-          String(item.id) ===
-          String(booking.id)
-      );
-
-
+    bookings = getStorageData("gear_bookings", []);
+    const index = bookings.findIndex(item => String(item.id) === String(booking.id));
     if (index !== -1) {
-
-      bookings[index]
-        .confirmationEmailSent =
-          true;
-
-
-      saveStorageData(
-        "gear_bookings",
-        bookings
-      );
-
+      bookings[index].confirmationEmailSent = true;
+      saveStorageData("gear_bookings", bookings);
     }
-
-
-    console.log(
-      "Confirmation email sent."
-    );
-
+  } catch (error) {
+    console.error("Email failed:", error);
   }
-
-  catch (error) {
-
-    console.error(
-      "Email failed:",
-      error
-    );
-
-  }
-
 }
 
-
-/* ============================================================
-   CUSTOMER CANCELLATION
-   ============================================================ */
-
-document
-  .getElementById(
-    "cancelBookingButton"
-  )
-  .addEventListener(
-    "click",
-    customerCancelBooking
-  );
-
+document.getElementById("cancelBookingButton").addEventListener("click", customerCancelBooking);
 
 function customerCancelBooking() {
+  if (!currentBookingId) return;
+  bookings = getStorageData("gear_bookings", []);
+  const index = bookings.findIndex(item => String(item.id) === String(currentBookingId));
+  if (index === -1) return alert("This booking could not be found.");
 
-  if (!currentBookingId) {
-    return;
+  const booking = bookings[index];
+  if (booking.paymentVerified === true || booking.status === "Confirmed" || booking.status === "Paid") {
+    return alert("Your payment has already been verified. Please contact Candid Clicks regarding cancellation.");
   }
 
+  if (!confirm(`Cancel reservation ${booking.reference}?`)) return;
 
-  bookings =
-    getStorageData(
-      "gear_bookings",
-      []
-    );
+  bookings[index].status = "Cancelled";
+  bookings[index].cancelledAt = new Date().toISOString();
+  saveStorageData("gear_bookings", bookings);
 
-
-  const index =
-    bookings.findIndex(
-      item =>
-        String(item.id) ===
-        String(currentBookingId)
-    );
-
-
-  if (index === -1) {
-
-    alert(
-      "This booking could not be found."
-    );
-
-    return;
-
-  }
-
-
-  const booking =
-    bookings[index];
-
-
-  const isConfirmed =
-    booking.paymentVerified === true ||
-    booking.status === "Confirmed" ||
-    booking.status === "Paid";
-
-
-  if (isConfirmed) {
-
-    alert(
-      "Your payment has already been verified. Please contact Candid Clicks regarding cancellation."
-    );
-
-    return;
-
-  }
-
-
-  if (
-    !confirm(
-      `Cancel reservation ${booking.reference}?`
-    )
-  ) {
-    return;
-  }
-
-
-  bookings[index].status =
-    "Cancelled";
-
-
-  bookings[index].cancelledAt =
-    new Date().toISOString();
-
-
-  saveStorageData(
-    "gear_bookings",
-    bookings
-  );
-
-
-  currentBookingId =
-    null;
-
-
+  currentBookingId = null;
   stopBookingStatusMonitor();
+  updateBookingStatusUI(bookings[index]);
+  sessionStorage.removeItem("candid_clicks_current_booking");
 
-
-  updateBookingStatusUI(
-    bookings[index]
-  );
-
-
-  sessionStorage.removeItem(
-    "candid_clicks_current_booking"
-  );
-
-
-  alert(
-    "Your reservation has been cancelled."
-  );
-
+  alert("Your reservation has been cancelled.");
 }
 
-
-/* ============================================================
-   CROSS-TAB ADMIN UPDATES
-   ============================================================ */
-
-window.addEventListener(
-  "storage",
-  event => {
-
-    /*
-       If Admin changes inventory,
-       refresh the customer dropdown.
-    */
-
-    if (
-      event.key === "gear_inv"
-    ) {
-
-      loadInventory();
-
-    }
-
-
-    /*
-       If Admin confirms payment,
-       update this page immediately.
-    */
-
-    if (
-      event.key === "gear_bookings"
-    ) {
-
-      checkCurrentBookingStatus();
-
-    }
-
-  }
-);
-
-
-/* ============================================================
-   RECOVER BOOKING AFTER REFRESH
-   ============================================================ */
+window.addEventListener("storage", event => {
+  if (event.key === "gear_inv") loadInventory();
+  if (event.key === "gear_bookings") checkCurrentBookingStatus();
+});
 
 function recoverCurrentBooking() {
+  const savedId = sessionStorage.getItem("candid_clicks_current_booking");
+  if (!savedId) return;
 
-  const savedId =
-    sessionStorage.getItem(
-      "candid_clicks_current_booking"
-    );
+  bookings = getStorageData("gear_bookings", []);
+  inventory = getStorageData("gear_inv", []);
 
+  const booking = bookings.find(item => String(item.id) === String(savedId));
+  if (!booking) return sessionStorage.removeItem("candid_clicks_current_booking");
 
-  if (!savedId) {
-    return;
-  }
+  const gear = inventory.find(item => String(item.id) === String(booking.camId));
+  if (!gear) return sessionStorage.removeItem("candid_clicks_current_booking");
 
-
-  bookings =
-    getStorageData(
-      "gear_bookings",
-      []
-    );
-
-
-  inventory =
-    getStorageData(
-      "gear_inv",
-      []
-    );
-
-
-  const booking =
-    bookings.find(
-      item =>
-        String(item.id) ===
-        String(savedId)
-    );
-
-
-  if (!booking) {
-
-    sessionStorage.removeItem(
-      "candid_clicks_current_booking"
-    );
-
-    return;
-
-  }
-
-
-  const gear =
-    inventory.find(
-      item =>
-        String(item.id) ===
-        String(booking.camId)
-    );
-
-
-  if (!gear) {
-
-    sessionStorage.removeItem(
-      "candid_clicks_current_booking"
-    );
-
-    return;
-
-  }
-
-
-  currentBookingId =
-    booking.id;
-
-
-  showBookingSummary(
-    booking,
-    gear
-  );
-
-
+  currentBookingId = booking.id;
+  showBookingSummary(booking, gear);
   startBookingStatusMonitor();
-
 }
 
-
-/* ============================================================
-   INITIALIZE
-   ============================================================ */
-
 loadInventory();
-
 recoverCurrentBooking();
-
 </script>
 
 </body>
