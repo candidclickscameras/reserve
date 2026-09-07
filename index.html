@@ -1122,26 +1122,8 @@ function renderSelect() {
       option.value =
         String(unit.id);
 
-
-      const daily =
-        Number(unit.daily || 0);
-
-      const multiDay =
-        Number(
-          unit.multiDayRate ??
-          unit.daily ??
-          0
-        );
-
-      const deposit =
-        Number(unit.deposit || 0);
-
-
-      option.textContent =
-        `${unit.name} — ₱${money(daily)}/day | ` +
-        `₱${money(multiDay)}/day for 4+ days | ` +
-        `Deposit ₱${money(deposit)}`;
-
+      // Display only the unit name in the dropdown
+      option.textContent = unit.name;
 
       select.appendChild(
         option
@@ -1210,11 +1192,11 @@ function calculateRentalPrice(
 
 
   /*
-    Your current Admin data does not
-    store an hourly rate.
+     Your current Admin data does not
+     store an hourly rate.
 
-    For rentals under 24 hours,
-    charge one full daily rate.
+     For rentals under 24 hours,
+     charge one full daily rate.
   */
 
   if (hours < 24) {
@@ -1415,8 +1397,8 @@ function submitBooking(event) {
 
 
   /*
-    ALWAYS RELOAD LATEST DATA
-    FROM ADMIN STORAGE
+     ALWAYS RELOAD LATEST DATA
+     FROM ADMIN STORAGE
   */
 
   inventory =
@@ -2422,8 +2404,8 @@ window.addEventListener(
   event => {
 
     /*
-      If Admin changes inventory,
-      refresh the customer dropdown.
+       If Admin changes inventory,
+       refresh the customer dropdown.
     */
 
     if (
@@ -2436,8 +2418,8 @@ window.addEventListener(
 
 
     /*
-      If Admin confirms payment,
-      update this page immediately.
+       If Admin confirms payment,
+       update this page immediately.
     */
 
     if (
